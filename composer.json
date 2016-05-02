@@ -7,8 +7,7 @@
     "authors": [
         {
             "name": "Gustav Elmgren",
-            "email": "gustavelmgren@gmail.com",
-           
+            "email": "gustavelmgren@gmail.com", 
         }
     ],
     "require": {
