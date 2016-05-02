@@ -1,0 +1,15 @@
+{
+    "name": "gel/cdatabase",    
+    "description": "Logging errors",
+    "keywords": ["log", "logging", "errors"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gustav Elmgren",
+            "email": "gustavelmgren@gmail.com",
+         
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
