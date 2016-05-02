@@ -1,5 +1,5 @@
 {
-    "name": "gel/logger",    
+	"name": "gel/logger",    
     "description": "Logging errors",
     "keywords": ["log", "logging", "errors"],
     "license": "MIT",
@@ -12,4 +12,5 @@
     ],
     "require": {
         "php": ">=5.4"
-    },
+    }
+}
