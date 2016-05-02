@@ -1,5 +1,5 @@
 {
-    "name": "gel/cdatabase",    
+    "name": "gel/logger",    
     "description": "Logging errors",
     "keywords": ["log", "logging", "errors"],
     "license": "MIT",
