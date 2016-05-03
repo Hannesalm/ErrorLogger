@@ -7,7 +7,7 @@ Include gel/error-logging in your composer.json.
 ```
    {
     "require": {
-        "gel/error-logging": "dev-master"
+        "gel/error-logging": "1.1"
     }
    }
 ```
