@@ -47,12 +47,13 @@ namespace gel\logger;
          * @param string $logfile The path to the loggable file.
          */
         public function __construct($logfile) {
-            if($this->fileHandle == NULL)
-                $this->openLogFile($logfile);
-            
-            $this->devMode = false;
             set_error_handler([$this,"log"]);
             error_reporting(-1);
+            $this->devMode = false;
+
+            if($this->fileHandle == NULL)
+                $this->openLogFile($logfile);
+
         }
 
         /**
@@ -63,14 +64,18 @@ namespace gel\logger;
         }
 
 
-		/**
-		* If devMode is true, error messages will be shown on site.
-		* @params bool $bool 
-		*/
+        /**
+         * Set developer's mode on, errors will be displayed on website.
+         * @param bool $bool
+         */
         public function displayErrors($bool){
             $this->devMode = $bool;
         }
 
+        /**
+         * Change error_reporting
+         * @param int $level What type of level error_reporting should display
+         */
         public function changeErrorReporting($level){
 
             error_reporting($level);
@@ -142,7 +147,7 @@ namespace gel\logger;
             $this->closeLogFile();
 
             if(!is_dir(dirname($logFile))){
-                if(!mkdir(dirname($logFile), FileLogger::FILE_CHMOD, true)){
+                if(!mkdir(dirname($logFile), CLoggingHelper::FILE_CHMOD, true)){
                     throw new Exception('Could not find or create directory for log file.');
                 }
             }
@@ -165,6 +170,15 @@ namespace gel\logger;
             return "[TIME: ".$this->getTime()."]" . " - " . "[LEVEL: " . $this->friendly_error_type($errno) . "]" . " - ". "[MESSAGE: " . $errstr. "]" .  " - ".  "[IN: " . $errfile . "]" . " - " . "[ROW: " .  $errline . "]";
         }
 
+
+        /**
+         * Return a formatted string to display as a warning
+         * @param int $errno Contains the level of the error raised
+         * @param string $errstr Contains the error message,
+         * @param string $errfile Contains the filename that the error was raised in
+         * @param int $errline contains the line number the error was raised at
+         * @return string
+         */
 
         public function printErrors($errno, $errstr, $errfile, $errline){
 
