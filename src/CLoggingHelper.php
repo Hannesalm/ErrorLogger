@@ -1,7 +1,6 @@
 <?php
 namespace gel\logger;
 
-    use Anax\Exception;
 
     /**
      * File logger
@@ -11,7 +10,7 @@ namespace gel\logger;
      * @author gel
      */
 	 
-    class FileLogger {
+    class CLoggingHelper {
 
         /**
          * Holds the file handle.
@@ -38,6 +37,9 @@ namespace gel\logger;
 		*/
 		
 		private $devMode = NULL;
+
+
+
 
         /**
          * Opens the file handle and sets new error handler.
