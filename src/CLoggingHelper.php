@@ -3,14 +3,14 @@ namespace gel\logger;
 
     use Anax\Exception;
 
-
     /**
      * File logger
      *
      * Log notices, warnings, errors or fatal errors into a log file.
      *
-     * @author gehaxelt
+     * @author gel
      */
+	 
     class FileLogger {
 
         /**
@@ -19,8 +19,6 @@ namespace gel\logger;
          * @var resource
          */
         protected $fileHandle = NULL;
-
-        private $devMode = NULL;
 
         /**
          * The time format to show in the log.
@@ -33,20 +31,26 @@ namespace gel\logger;
          * The file permissions.
          */
         const FILE_CHMOD = 756;
-
+		
+		/**
+		* Will be true if error message should show on site.
+		* @var bool
+		*/
+		
+		private $devMode = NULL;
 
         /**
-         * Opens the file handle.
+         * Opens the file handle and sets new error handler.
          *
          * @param string $logfile The path to the loggable file.
          */
         public function __construct($logfile) {
-            if($this->fileHandle == NULL){
+            if($this->fileHandle == NULL)
                 $this->openLogFile($logfile);
-            }
-
+            
             $this->devMode = false;
             set_error_handler([$this,"log"]);
+            error_reporting(-1);
         }
 
         /**
@@ -57,17 +61,26 @@ namespace gel\logger;
         }
 
 
+		/**
+		* If devMode is true, error messages will be shown on site.
+		* @params bool $bool 
+		*/
         public function displayErrors($bool){
             $this->devMode = $bool;
         }
 
+        public function changeErrorReporting($level){
+
+            error_reporting($level);
+        }
+
         /**
          * Logs the message into the log file.
-         * @param int $errno Contains the level of the error raised
-         * @param string $errstr Contains the error message,
-         * @param string $errfile Contains the filename that the error was raised in
-         * @param int $errline contains the line number the error was raised at
-         * @throws Exception
+         * @param int $errno Contains the level of the error raised.
+         * @param string $errstr Contains the error message.
+         * @param string $errfile Contains the filename that the error was raised in.
+         * @param int $errline contains the line number the error was raised at.
+         * @throws \Exception
          */
         public function log($errno, $errstr, $errfile, $errline) {
             if($this->fileHandle == NULl){
@@ -97,6 +110,7 @@ namespace gel\logger;
 
         /**
          * Returns the current timestamp.
+         *
          *
          * @return string with the current date
          */
@@ -156,6 +170,7 @@ namespace gel\logger;
     }
 
         /**
+		 * Translate an error message to a more friendly output. 
          * @param int $type User error
          * @return string User error
          */
