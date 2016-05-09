@@ -10,6 +10,7 @@ class CLoggingHelperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * 
      */
     public function testFriendlyErrorType(){
 
