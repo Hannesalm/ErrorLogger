@@ -10,7 +10,7 @@ class CLoggingHelperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * 
+     *
      */
     public function testFriendlyErrorType(){
 
@@ -24,6 +24,24 @@ class CLoggingHelperTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testObjectCanBeConstructedForValidConstructorArguments(){
+
+        $log = new CLoggingHelper("tmp/example.log.php");
+
+        $this->assertInstanceOf('gel\\logger\\CLoggingHelper', $log);
+
+    }
+
+    /**
+     * @expectedException \gel\logger\Exception
+     */
+
+    public function testExceptionIsThrownForFileHandler(){
+
+        $log = new CLoggingHelper(NULL);
+
+        $log->log(1, '', '', 1);
+    }
 
 
 }
